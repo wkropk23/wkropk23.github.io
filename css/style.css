@@ -1,0 +1,64 @@
+/* Reset some defaults */
+body, h1, h2, p, ul {
+  margin: 0;
+  padding: 0;
+}
+
+/* General page styling */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background: #f9f9f9;
+  color: #333;
+  padding: 20px;
+}
+
+/* Header and nav */
+header {
+  background: #004466;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+header h1 {
+  margin-bottom: 10px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* Main content */
+main {
+  margin-top: 20px;
+}
+
+section {
+  margin-bottom: 30px;
+}
+
+h2 {
+  color: #004466;
+  margin-bottom: 10px;
+}
+
+/* Footer */
+footer {
+  margin-top: 40px;
+  text-align: center;
+  color: #777;
+  font-size: 0.9em;
+}
