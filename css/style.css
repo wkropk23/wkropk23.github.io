@@ -1,58 +1,171 @@
-/* Reset some defaults */
-body, h1, h2, p, ul {
+/* Reset defaults */
+body, h1, h2, h3, p, ul {
   margin: 0;
   padding: 0;
 }
 
-/* General page styling */
+/* General styling */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
   line-height: 1.6;
-  background: #f9f9f9;
+  background: #f5f7fa;
   color: #333;
+}
+
+.container {
+  width: 90%;
+  max-width: 1000px;
+  margin: auto;
   padding: 20px;
 }
 
-/* Header and nav */
+/* Header */
 header {
   background: #004466;
   color: white;
-  padding: 20px;
-  border-radius: 8px;
+  padding: 40px 20px;
+  text-align: center;
+  border-radius: 0 0 12px 12px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 header h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.8rem;
   margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+header .tagline {
+  font-size: 1.1rem;
+  font-weight: 300;
+  margin-bottom: 20px;
 }
 
 nav ul {
   list-style: none;
   display: flex;
-  gap: 15px;
+  justify-content: center;
+  gap: 20px;
 }
 
 nav a {
   color: white;
   text-decoration: none;
   font-weight: bold;
+  transition: color 0.2s ease;
 }
 
 nav a:hover {
-  text-decoration: underline;
+  color: #007bff;
 }
 
 /* Main content */
 main {
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 section {
-  margin-bottom: 30px;
+  margin-bottom: 70px;
+  padding: 30px 0;
+}
+
+section ul {
+  list-style-position: inside;
+  padding-left: 0;
 }
 
 h2 {
+  font-family: 'Montserrat', sans-serif;
   color: #004466;
+  margin-bottom: 15px;
+  font-size: 1.6rem;
+  border-bottom: 2px solid #004466;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+/* Project cards */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* bigger min width */
+  gap: 20px;
+}
+
+.project-card {
+  background: #fefefe;
+  background: linear-gradient(135deg, #ffffff, #f8f8f8);
+  padding: 20px;
+  border: 1px solid #e0e0e0; /* light gray */
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column; /* ensures children stack vertically */
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  border-color: #0077cc; /* subtle accent color */;
+}
+
+.project-card h3 {
+  font-family: 'Montserrat', sans-serif;
   margin-bottom: 10px;
+}
+
+.project-card a {
+  color: #004466;
+  text-decoration: none;
+}
+
+.project-card a:hover {
+  text-decoration: underline;
+}
+
+.project-card img {
+  width: 100%;
+  max-height: 400-500px; /* taller for visibility */
+  object-fit: contain;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+/* Contact section */
+#contact a {
+  color: #004466;
+  font-weight: bold;
+}
+
+#about {
+  padding: 60px 20px; /* top/bottom space */
+}
+
+#about p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 700px; /* keeps it readable */
+}
+
+.about-photo {
+  display: block;
+  margin: 30px auto 0; /* centers it with top spacing */
+  width: 90%;
+  max-width: 1000px;    /* or whatever fits your layout */
+  height: auto;
+  border: 3px solid #0077cc; /* your accent color */
+  border-radius: 10px; /* optional, for softer edges */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.about-photo:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
 }
 
 /* Footer */
@@ -61,4 +174,140 @@ footer {
   text-align: center;
   color: #777;
   font-size: 0.9em;
+  padding: 20px 0;
+}
+
+
+/* Responsive design */
+@media (max-width: 600px) {
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+  header h1 {
+    font-size: 2rem;
+  }
+  header .tagline {
+    font-size: 1rem;
+  }
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 900px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== Carousel container ===== */
+.project-card .carousel {
+  position: relative;
+  width: 100%;
+  max-width: 1000px; /* matches about-photo max-width */
+  height: auto; /* adapts to image height */
+  margin: 20px auto 0; /* center horizontally with top spacing */
+  border-radius: 10px;
+  overflow: hidden; /* hides non-active images */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  background: #f5f7fa; /* matches site background to hide gaps */
+}
+
+/* ===== Images inside carousel ===== */
+.project-card .carousel img {
+  width: 100%;
+  height: auto; /* preserves natural height */
+  object-fit: contain; /* shows full image without cropping */
+  display: none; /* hidden by default */
+  border-radius: 10px;
+}
+
+/* Show only the active image */
+.project-card .carousel img.active {
+  display: block;
+}
+
+/* ===== Carousel buttons ===== */
+.project-card .carousel button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  z-index: 10;
+  font-size: 18px;
+  transition: background 0.2s ease;
+}
+
+.project-card .carousel button:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+/* Position prev and next buttons */
+.project-card .carousel .prev { left: 10px; }
+.project-card .carousel .next { right: 10px; }
+
+/* ===== Responsive adjustments ===== */
+@media (max-width: 900px) {
+  .project-card .carousel {
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 600px) {
+  .project-card .carousel {
+    max-width: 90%;
+  }
+
+  .project-card .carousel button {
+    padding: 5px 10px;
+    font-size: 16px;
+  }
+}
+
+/* New styles for two_tank_simulation/index.html */
+.feature-list {
+  list-style: none;
+  padding: 0;
+}
+
+.feature-list li {
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 15px;
+}
+
+.feature-list li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: #004466;
+  font-weight: bold;
+}
+
+.demo-link, .github-link {
+  display: inline-block;
+  background: #004466;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.demo-link:hover, .github-link:hover {
+  background: #007bff;
+  text-decoration: none;
+}
+
+.demo-image {
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin-top: 20px;
 }

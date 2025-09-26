@@ -2,42 +2,66 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Two Tank Simulation</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 2rem;
-      background-color: #f4f4f9;
-      color: #333;
-    }
-    header {
-      margin-bottom: 2rem;
-    }
-    a {
-      color: #0066cc;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-  </style>
+  <meta name="description" content="Two-Tank Simulation with PID Control by Billy Kropke, showcasing dynamic modeling and real-time visualization using Python, Flask, and Chart.js.">
+  <meta name="keywords" content="Billy Kropke, Two-Tank Simulation, PID Control, Chemical Engineering, Python, Flask, Chart.js">
+  <meta name="author" content="Billy Kropke">
+  <title>Two-Tank Simulation | Billy Kropke</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="icon" type="image/png" href="../../images/favicon.png">
 </head>
 <body>
-  <header>
-    <h1>Two Tank Simulation</h1>
-    <p>This page will showcase the details and visualization of the two-tank simulation project.</p>
-    <nav>
-      <a href="../../index.html">← Back to Home</a>
-    </nav>
+  <header role="banner">
+    <div class="container">
+      <h1>Two-Tank Simulation with PID Control</h1>
+      <p class="tagline">Dynamic Modeling • Control Systems • Real-Time Visualization</p>
+      <nav role="navigation">
+        <ul>
+          <li><a href="../../index.html">Back to Portfolio</a></li>
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#demo">Demo</a></li>
+          <li><a href="#notes">Notes</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <main>
-    <h2>Project Overview</h2>
-    <p>Here you’ll add explanations, visuals, and links related to your simulation.</p>
+  <main class="container" role="main">
+    <section id="overview">
+      <h2>Overview</h2>
+      <p>This project models two interconnected liquid tanks with PID level control, designed to simulate fluid dynamics in chemical engineering processes. Users can adjust PID parameters and inlet flow rates to observe real-time system responses, achieving stable control under varying conditions. Built as a demonstration of process control, it integrates numerical modeling with an interactive web interface.</p>
+    </section>
 
-    <h2>Demo</h2>
-    <p>Eventually you can embed charts, animations, or link to the interactive version of your simulation here.</p>
+    <section id="features">
+      <h2>Features</h2>
+      <ul class="feature-list">
+        <li>Adjustable PID parameters (proportional, integral, derivative) in both independent and dependent forms for flexible control tuning.</li>
+        <li>Real-time visualization of tank levels using Chart.js, updating dynamically with user inputs.</li>
+        <li>Robust backend with Python, Flask for server-side logic, and SciPy for solving differential equations.</li>
+        <li>Responsive web interface built with HTML and CSS, optimized for desktop and mobile.</li>
+      </ul>
+    </section>
+
+    <section id="demo">
+      <h2>Live Demo</h2>
+      <p>Explore the interactive simulation hosted on Render:</p>
+      <p><a href="https://two-tank-simulation.onrender.com" target="_blank" class="demo-link">Launch Demo</a></p>
+      <img src="screenshot.png" alt="Two-Tank Simulation Interface" loading="lazy" class="demo-image">
+    </section>
+
+    <section id="notes">
+      <h2>Notes & Documentation</h2>
+      <p>Detailed documentation, including mathematical models, parameter tuning results, and screenshots, is available in the project repository. View the code and experiment logs on GitHub:</p>
+      <p><a href="https://github.com/wkropk23/Two_Tank_Simulation" target="_blank" class="github-link">View on GitHub</a></p>
+    </section>
   </main>
+
+  <footer role="contentinfo">
+    <p>&copy; <script>document.write(new Date().getFullYear())</script> Billy Kropke</p>
+  </footer>
+
+  <script src="../../js/scripts.js"></script>
 </body>
 </html>

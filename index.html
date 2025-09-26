@@ -3,35 +3,75 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Billy Kropke Portfolio</title>
+  <meta name="description" content="Portfolio of Billy Kropke, a Chemical Engineering graduate specializing in simulation, control systems, and data-driven projects.">
+  <meta name="keywords" content="Billy Kropke, Chemical Engineering, Portfolio, Simulation, PID Control, Python, JavaScript">
+  <meta name="author" content="Billy Kropke">
+  <title>Billy Kropke | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Montserrat:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/png" href="images/favicon.png">
 </head>
 <body>
-  <header>
-    <h1>Billy Kropke Portfolio</h1>
-    <nav>
-      <ul>
-        <li><a href="projects/two_tank_simulation/index.html">Two-Tank Simulation</a></li>
-      </ul>
-    </nav>
+  <header role="banner">
+    <div class="container">
+      <h1>Billy Kropke</h1>
+      <p class="tagline">Chemical Engineer • Simulation & Control • Data-Driven Projects</p>
+      <nav role="navigation">
+        <ul>
+          <li><a href="#about">About Me</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <main>
-    <section>
+  <main class="container" role="main">
+    <section id="about">
       <h2>About Me</h2>
-      <p>Hello! I’m Billy Kropke, a Chemical Engineering graduate with a passion for simulation, coding, and data-driven projects. This portfolio showcases my work in Python, web development, and control systems.</p>
+      <p>Hello! I’m Billy Kropke, a Chemical Engineering graduate who enjoys building simulations and interactive tools to explore engineering systems. Some of the tools I use include Python, HTML, and Aspen Plus, which I use to model and solve engineering challenges.</p>
+      <p>Download my <a href="assets/resume.pdf">resume</a>.</p>
+      <img src="images/about_me.png" class="about-photo">
     </section>
 
-    <section>
+    <section id="projects">
       <h2>Projects</h2>
-      <ul>
-        <li><a href="projects/two_tank_simulation/index.html">Two-Tank Simulation with PID Control</a></li>
-      </ul>
+      <div class="project-grid">
+        <div class="project-card">
+          <h3><a href="projects/two_tank_simulation/index.html">Two-Tank Simulation with PID Control</a></h3>
+          <p>A Python-based dynamic simulation of two interconnected tanks, featuring adjustable PID parameters to maintain stable control under changing flow conditions. Built with Flask and Chart.js for interactive visualization.</p>
+          <p><a href="https://github.com/yourusername/two-tank-simulation">View Code</a></p>
+          <div class="carousel">
+            <img src="images/interface_initial.png" alt="Initial Screenshot" class="active">
+            <img src="images/interface_chart.png" alt="Chart Screenshot">
+            <img src="images/interface_dynamic.png" alt="PID Adjustment Screenshot">
+            <button class="prev">&#10094;</button>
+            <button class="next">&#10095;</button>
+          </div>
+        </div>
+        <div class="project-card">
+          <h3>Heat Exchanger Calculator (Coming Soon)</h3>
+          <p>A web-based tool for performing heat exchanger calculations, supporting double pipe and shell-and-tube configurations. Users will be able to compute key metrics such as heat transfer area, fouling coefficient, and pressure drop. Built with Python and an HTML interface.</p>
+        </div>
+        <div class="project-card">
+          <h3>Unit Converter (Coming Soon)</h3>
+          <p>A web-based tool for converting units across multiple categories such as length, mass, volume, and temperature. The interactive tool will allow quick and accurate conversions, and full functionality will be available soon.</p>
+        </div>
+        <div class="project-card">
+          <h3>Senior Design Project (Coming Soon)</h3>
+          <p>A comprehensive senior engineering project focused on sustainable green ammonia production. Delivered a detailed Aspen Plus simulation of the process along with an extensive report covering design, optimization, and environmental impact. Full project details will be available soon.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Reach me via <a href="mailto:billy.kropke@example.com">email</a>, connect on <a href="https://linkedin.com/in/billykropke">LinkedIn</a>, or view my code on <a href="https://github.com/yourusername">GitHub</a>.</p>
     </section>
   </main>
 
-  <footer>
-    <p>&copy; 2025 Billy Kropke</p>
+  <footer role="contentinfo">
+    <p>&copy; <script>document.write(new Date().getFullYear())</script> Billy Kropke</p>
   </footer>
 
   <script src="js/scripts.js"></script>
