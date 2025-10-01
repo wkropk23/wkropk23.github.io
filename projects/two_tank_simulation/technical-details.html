@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Technical details of the Two-Tank Simulation with PID Control by Billy Kropke, including mathematical models, differential equations, and PID control derivations.">
+  <meta name="keywords" content="Billy Kropke, Two-Tank Simulation, PID Control, Mathematical Model, Chemical Engineering, Python, SciPy">
+  <meta name="author" content="Billy Kropke">
+  <title>Two-Tank Simulation: Technical Details | Billy Kropke</title>
+
+  <!-- Fonts and Styles -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+
+  <!-- MathJax for equations -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+</head>
+<body>
+  <!-- Header -->
+  <header role="banner">
+    <div class="container">
+      <h1>Two-Tank Simulation: Technical Details</h1>
+      <p class="tagline">Mathematical Model • PID Control • System Dynamics</p>
+      <nav role="navigation">
+        <ul>
+          <li><a href="../../index.html">Back to Portfolio</a></li>
+          <li><a href="index.html">Back to Project</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container" role="main">
+    <section id="mathematical-model">
+      <h2>Mathematical Model</h2>
+      <p>The Two-Tank Simulation models the dynamics of two interconnected liquid tanks, with a PID controller regulating the liquid level in the first tank. This section details the governing equations, control strategy, and implementation specifics, demonstrating the integration of chemical engineering principles with software development.</p>
+
+      <h3>System Dynamics</h3>
+      <p>The system consists of two tanks where liquid flows from an inlet to Tank 1, then from Tank 1 to Tank 2, and out of Tank 2. The liquid heights <em>h₁</em> and <em>h₂</em> are governed by mass balance equations:</p>
+      <p>$$\frac{dh_1}{dt} = \frac{Q_{in} - Q_{out1}}{A_1}$$</p>
+      <p>$$\frac{dh_2}{dt} = \frac{Q_{out1} - Q_{out2}}{A_2}$$</p>
+
+      <p>Where:</p>
+      <ul class="feature-list">
+        <li>\( h_1, h_2 \): Liquid heights in Tank 1 and Tank 2 (ft)</li>
+        <li>\( Q_{in} \): Inlet flow rate to Tank 1 (ft³/s, user-adjustable)</li>
+        <li>\( Q_{out1} \): Flow rate from Tank 1 to Tank 2 (ft³/s)</li>
+        <li>\( Q_{out2} \): Outlet flow rate from Tank 2 (ft³/s)</li>
+        <li>\( A_1, A_2 \): Cross-sectional areas of Tank 1 and Tank 2 (ft², e.g., \( A_1 = 2 \, \text{ft}^2, \, A_2 = 1.5 \, \text{ft}^2 \))</li>
+      </ul>
+
+      <p>Flow rates are determined by valve equations, approximated as:</p>
+      <p>$$Q_{out1} = C_{v1} \sqrt{h_1 - h_2}$$</p>
+      <p>$$Q_{out2} = C_{v2} \sqrt{h_2}$$</p>
+      <p>Where \( C_{v1}, C_{v2} \) are valve coefficients (e.g., \( C_{v1} = 0.1 \, \text{ft}^{2.5}/\text{s} \)), and the square root models the pressure drop across valves.</p>
+
+      <h3>PID Control</h3>
+      <p>A PID controller adjusts \( Q_{out1} \) by modulating the valve position to maintain \( h_1 \) at a setpoint (e.g., 8 ft). The control law is:</p>
+      <p>$$u(t) = K_p e(t) + K_i \int e(t) \, dt + K_d \frac{de(t)}{dt}$$</p>
+      <p>Where:</p>
+      <ul class="feature-list">
+        <li>\( u(t) \): Control signal (valve position, normalized 0–1)</li>
+        <li>\( e(t) = h_{\text{setpoint}} - h_1 \): Error</li>
+        <li>\( K_p, K_i, K_d \): Proportional, integral, and derivative gains (user-adjustable, e.g., \( K_p = 10, K_i = 2, K_d = 0 \))</li>
+      </ul>
+      <p>The controller supports both independent and dependent PID forms, with parameters tuned to minimize overshoot and achieve stability under varying \( Q_{in} \).</p>
+
+      <h3>Implementation Details</h3>
+      <p>The system equations are solved numerically using SciPy’s <code>odeint</code> function, which integrates the differential equations over time. Flask handles user inputs (e.g., \( Q_{in}, K_p, K_i, K_d \)) via a web interface, and Chart.js renders real-time plots of \( h_1 \) and \( h_2 \). Key implementation notes:</p>
+      <ul class="feature-list">
+        <li><strong>Numerical Stability</strong>: Safeguards prevent negative heights or flows (e.g., \( \max(0, h_1 - h_2) \) in \( Q_{out1} \)).</li>
+        <li><strong>Assumptions</strong>: Incompressible fluid, constant tank areas, and linear valve response for simplicity.</li>
+        <li><strong>Visualization</strong>: Chart.js updates plots at 60 FPS, synchronized with ODE solutions.</li>
+      </ul>
+
+      <h3>System Diagram</h3>
+      <p>The diagram below illustrates the two-tank system configuration:</p>
+      <img src="diagram.png" alt="Two-Tank System Diagram" loading="lazy" class="demo-image">
+      <p><em>Note: Replace with an actual diagram of the system, showing tanks, valves, and flow paths.</em></p>
+
+      <h3>Applications</h3>
+      <p>This simulation is relevant to chemical engineering processes like reactor level control or distillation column operations, demonstrating robust control under dynamic conditions. The codebase and interface are extensible for multi-tank systems or advanced control strategies.</p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer role="contentinfo">
+    <p>&copy; <script>document.write(new Date().getFullYear())</script> Billy Kropke</p>
+  </footer>
+
+  <!-- Main Script -->
+  <script src="../../js/scripts.js"></script>
+</body>
+</html>

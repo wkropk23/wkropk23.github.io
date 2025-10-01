@@ -48,13 +48,35 @@
       <h2>Live Demo</h2>
       <p>Explore the interactive simulation hosted on Render:</p>
       <p><a href="https://two-tank-simulation.onrender.com" target="_blank" class="demo-link">Launch Demo</a></p>
-      <img src="screenshot.png" alt="Two-Tank Simulation Interface" loading="lazy" class="demo-image">
+      <div class="carousel">
+        <div class="carousel-slide active">
+          <img src="../../images/interface_initial.png" alt="Initial condition of simulation">
+          <p class="caption">Initial simulation view showing default inlet pressure, PID settings, and tank heights at normal levels</p>
+        </div>
+        <div class="carousel-slide">
+          <img src="../../images/interface_initial_tank.png" alt="Initial Tank">
+          <p class="caption">Close-up of the two-tank system with adjustable PID parameters and inlet pressure</p>
+        </div>
+        <div class="carousel-slide">
+          <img src="../../images/interface_initial_chart.png" alt="Initial Chart">
+          <p class="caption">Graph showing tank levels over time, initially stable at the normal height of 8 ft</p>
+        </div>
+        <div class="carousel-slide">
+          <img src="../../images/interface_dynamic.png" alt="Interface Dynamic">
+          <p class="caption">Inlet pressure increased, showing dynamic tank level changes and the graph response.</p>
+        </div>
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+      </div>
     </section>
 
     <section id="notes">
       <h2>Notes & Documentation</h2>
-      <p>Detailed documentation, including mathematical models, parameter tuning results, and screenshots, is available in the project repository. View the code and experiment logs on GitHub:</p>
-      <p><a href="https://github.com/wkropk23/Two_Tank_Simulation" target="_blank" class="github-link">View on GitHub</a></p>
+      <p>Ready to dive into the code? Check out the full repository on GitHub, complete with a detailed README and experiment results. Want to understand the math behind the simulation? Explore the technical details for equations, derivations, and control theory insights.</p>
+      <p>
+        <a href="https://github.com/wkropk23/Two_Tank_Simulation" target="_blank" class="github-link">View on GitHub</a>
+        <a href="technical-details.html" class="technical-link">Technical Details</a>
+      </p>
     </section>
   </main>
 
