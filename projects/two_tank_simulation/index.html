@@ -1,24 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Two-Tank Simulation with PID Control by Billy Kropke, showcasing dynamic modeling and real-time visualization using Python, Flask, and Chart.js.">
-  <meta name="keywords" content="Billy Kropke, Two-Tank Simulation, PID Control, Chemical Engineering, Python, Flask, Chart.js">
+  <meta name="description"
+    content="Two-Tank Simulation with PID Control by Billy Kropke, showcasing dynamic modeling and real-time visualization using Python, Flask, and Chart.js.">
+  <meta name="keywords"
+    content="Billy Kropke, Two-Tank Simulation, PID Control, Chemical Engineering, Python, Flask, Chart.js">
   <meta name="author" content="Billy Kropke">
   <title>Two-Tank Simulation | Billy Kropke</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Montserrat:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
   <link rel="icon" type="image/png" href="../../images/favicon.png">
 </head>
+
 <body>
   <header role="banner">
     <div class="container">
       <h1>Two-Tank Simulation with PID Control</h1>
       <p class="tagline">Dynamic Modeling • Control Systems • Real-Time Visualization</p>
-      <nav role="navigation">
+
+      <!-- Back links -->
+      <nav class="back-links">
         <ul>
           <li><a href="../../index.html">Back to Portfolio</a></li>
+        </ul>
+      </nav>
+
+      <!-- Section navigation -->
+      <nav class="section-nav">
+        <ul>
           <li><a href="#overview">Overview</a></li>
           <li><a href="#features">Features</a></li>
           <li><a href="#demo">Demo</a></li>
@@ -31,13 +43,17 @@
   <main class="container" role="main">
     <section id="overview">
       <h2>Overview</h2>
-      <p>This project models two interconnected liquid tanks with PID level control, designed to simulate fluid dynamics in chemical engineering processes. Users can adjust PID parameters and inlet flow rates to observe real-time system responses, achieving stable control under varying conditions. Built as a demonstration of process control, it integrates numerical modeling with an interactive web interface.</p>
+      <p>This project models two interconnected liquid tanks with PID level control, designed to simulate fluid dynamics
+        in chemical engineering processes. Users can adjust PID parameters and inlet flow rates to observe real-time
+        system responses, achieving stable control under varying conditions. Built as a demonstration of process
+        control, it integrates numerical modeling with an interactive web interface.</p>
     </section>
 
     <section id="features">
       <h2>Features</h2>
       <ul class="feature-list">
-        <li>Adjustable PID parameters (proportional, integral, derivative) in both independent and dependent forms for flexible control tuning.</li>
+        <li>Adjustable PID parameters (proportional, integral, derivative) in both independent and dependent forms for
+          flexible control tuning.</li>
         <li>Real-time visualization of tank levels using Chart.js, updating dynamically with user inputs.</li>
         <li>Robust backend with Python, Flask for server-side logic, and SciPy for solving differential equations.</li>
         <li>Responsive web interface built with HTML and CSS, optimized for desktop and mobile.</li>
@@ -47,11 +63,13 @@
     <section id="demo">
       <h2>Live Demo</h2>
       <p>Explore the interactive simulation hosted on Render:</p>
-      <p><a href="https://two-tank-simulation.onrender.com" target="_blank" class="demo-link">Launch Demo</a></p>
+      <p><a href="https://two-tank-simulation.onrender.com" target="_blank" class="demo-link"
+          rel="noopener noreferrer">Launch Demo</a></p>
       <div class="carousel">
         <div class="carousel-slide active">
           <img src="../../images/interface_initial.png" alt="Initial condition of simulation">
-          <p class="caption">Initial simulation view showing default inlet pressure, PID settings, and tank heights at normal levels</p>
+          <p class="caption">Initial simulation view showing default inlet pressure, PID settings, and tank heights at
+            normal levels</p>
         </div>
         <div class="carousel-slide">
           <img src="../../images/interface_initial_tank.png" alt="Initial Tank">
@@ -72,18 +90,24 @@
 
     <section id="notes">
       <h2>Notes & Documentation</h2>
-      <p>Ready to dive into the code? Check out the full repository on GitHub, complete with a detailed README and experiment results. Want to understand the math behind the simulation? Explore the technical details for equations, derivations, and control theory insights.</p>
+      <p>Ready to dive into the code? Check out the full repository on GitHub, complete with a detailed README and
+        experiment results. Want to understand the math behind the simulation? Explore the technical details for
+        equations, derivations, and control theory insights.</p>
       <p>
-        <a href="https://github.com/wkropk23/Two_Tank_Simulation" target="_blank" class="github-link">View on GitHub</a>
+        <a href="https://github.com/wkropk23/Two_Tank_Simulation" target="_blank" class="github-link"
+          rel="noopener noreferrer">View on GitHub</a>
         <a href="technical-details.html" class="technical-link">Technical Details</a>
       </p>
     </section>
   </main>
 
   <footer role="contentinfo">
-    <p>&copy; <script>document.write(new Date().getFullYear())</script> Billy Kropke</p>
+    <p>&copy;
+      <script>document.write(new Date().getFullYear())</script> Billy Kropke
+    </p>
   </footer>
 
   <script src="../../js/scripts.js"></script>
 </body>
+
 </html>

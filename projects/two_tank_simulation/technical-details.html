@@ -1,99 +1,360 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Technical details of the Two-Tank Simulation with PID Control by Billy Kropke, including mathematical models, differential equations, and PID control derivations.">
-  <meta name="keywords" content="Billy Kropke, Two-Tank Simulation, PID Control, Mathematical Model, Chemical Engineering, Python, SciPy">
-  <meta name="author" content="Billy Kropke">
-  <title>Two-Tank Simulation: Technical Details | Billy Kropke</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Technical details of the Two-Tank Simulation with PID Control by Billy Kropke, including mathematical models, differential equations, and PID control derivations.">
+    <meta name="keywords"
+        content="Billy Kropke, Two-Tank Simulation, PID Control, Mathematical Model, Chemical Engineering, Python, SciPy">
+    <meta name="author" content="Billy Kropke">
+    <title>Two-Tank Simulation: Technical Details | Billy Kropke</title>
 
-  <!-- Fonts and Styles -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Montserrat:wght@700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../css/style.css">
-  <link rel="icon" type="image/png" href="/images/favicon.png">
+    <!-- Fonts and Styles -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Montserrat:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="icon" type="image/png" href="/images/favicon.png">
 
-  <!-- MathJax for equations -->
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-  </script>
+    <!-- MathJax for equations -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
 </head>
+
 <body>
-  <!-- Header -->
-  <header role="banner">
-    <div class="container">
-      <h1>Two-Tank Simulation: Technical Details</h1>
-      <p class="tagline">Mathematical Model • PID Control • System Dynamics</p>
-      <nav role="navigation">
-        <ul>
-          <li><a href="../../index.html">Back to Portfolio</a></li>
-          <li><a href="index.html">Back to Project</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+    <!-- Header -->
+    <header role="banner">
+        <div class="container">
+            <h1>Two-Tank Simulation: Technical Details</h1>
+            <p class="tagline">Mathematical Model • PID Control • System Dynamics</p>
 
-  <!-- Main Content -->
-  <main class="container" role="main">
-    <section id="mathematical-model">
-      <h2>Mathematical Model</h2>
-      <p>The Two-Tank Simulation models the dynamics of two interconnected liquid tanks, with a PID controller regulating the liquid level in the first tank. This section details the governing equations, control strategy, and implementation specifics, demonstrating the integration of chemical engineering principles with software development.</p>
+            <!-- Back links -->
+            <nav class="back-links">
+                <ul>
+                    <li><a href="../../index.html">Back to Portfolio</a></li>
+                    <li><a href="index.html">Back to Project</a></li>
+                </ul>
+            </nav>
 
-      <h3>System Dynamics</h3>
-      <p>The system consists of two tanks where liquid flows from an inlet to Tank 1, then from Tank 1 to Tank 2, and out of Tank 2. The liquid heights <em>h₁</em> and <em>h₂</em> are governed by mass balance equations:</p>
-      <p>$$\frac{dh_1}{dt} = \frac{Q_{in} - Q_{out1}}{A_1}$$</p>
-      <p>$$\frac{dh_2}{dt} = \frac{Q_{out1} - Q_{out2}}{A_2}$$</p>
+            <!-- Section navigation -->
+            <nav class="section-nav">
+                <ul>
+                    <li><a href="#two-tank-model">System Model</a></li>
+                    <li><a href="#pid-control">PID Control</a></li>
+                    <li><a href="#implementation-details">Implementation</a></li>
+                    <li><a href="#simulation-experiments">Experiments</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-      <p>Where:</p>
-      <ul class="feature-list">
-        <li>\( h_1, h_2 \): Liquid heights in Tank 1 and Tank 2 (ft)</li>
-        <li>\( Q_{in} \): Inlet flow rate to Tank 1 (ft³/s, user-adjustable)</li>
-        <li>\( Q_{out1} \): Flow rate from Tank 1 to Tank 2 (ft³/s)</li>
-        <li>\( Q_{out2} \): Outlet flow rate from Tank 2 (ft³/s)</li>
-        <li>\( A_1, A_2 \): Cross-sectional areas of Tank 1 and Tank 2 (ft², e.g., \( A_1 = 2 \, \text{ft}^2, \, A_2 = 1.5 \, \text{ft}^2 \))</li>
-      </ul>
+    <!-- Main Content -->
+    <main class="container" role="main">
+        <section id="two-tank-model">
+            <h2>Two-Tank System Model</h2>
+            <p>This section details the mathematical model of the interconnected two-tank system, independent of control
+                implementation. It includes governing equations, system variables, and degrees of freedom.</p>
 
-      <p>Flow rates are determined by valve equations, approximated as:</p>
-      <p>$$Q_{out1} = C_{v1} \sqrt{h_1 - h_2}$$</p>
-      <p>$$Q_{out2} = C_{v2} \sqrt{h_2}$$</p>
-      <p>Where \( C_{v1}, C_{v2} \) are valve coefficients (e.g., \( C_{v1} = 0.1 \, \text{ft}^{2.5}/\text{s} \)), and the square root models the pressure drop across valves.</p>
+            <!-- Governing Equations -->
+            <h3>Governing Equations (9)</h3>
+            <div class="equation-section">
+                <!-- Mass Balance Equations -->
+                <div class="equation-block">
+                    <h4>Tank Height Change</h4>
+                    <span class="equation">
+                        \[
+                        \frac{dH_1}{dt} = \frac{F_1 - F_2}{A_1} \tag{1,2}, \quad
+                        \frac{dH_2}{dt} = \frac{F_2 - F_3}{A_2}
+                        \]
+                    </span>
+                    <span class="equation">
+                        \[
+                        \text{where } A_1 = A_2 = \frac{\pi D^2}{4}
+                        \]
+                    </span>
+                    <p>Change in tank heights as a function of inlet and outlet flows.</p>
+                </div>
 
-      <h3>PID Control</h3>
-      <p>A PID controller adjusts \( Q_{out1} \) by modulating the valve position to maintain \( h_1 \) at a setpoint (e.g., 8 ft). The control law is:</p>
-      <p>$$u(t) = K_p e(t) + K_i \int e(t) \, dt + K_d \frac{de(t)}{dt}$$</p>
-      <p>Where:</p>
-      <ul class="feature-list">
-        <li>\( u(t) \): Control signal (valve position, normalized 0–1)</li>
-        <li>\( e(t) = h_{\text{setpoint}} - h_1 \): Error</li>
-        <li>\( K_p, K_i, K_d \): Proportional, integral, and derivative gains (user-adjustable, e.g., \( K_p = 10, K_i = 2, K_d = 0 \))</li>
-      </ul>
-      <p>The controller supports both independent and dependent PID forms, with parameters tuned to minimize overshoot and achieve stability under varying \( Q_{in} \).</p>
+                <!-- Flow Equations -->
+                <div class="equation-block">
+                    <h4>Flow Equations</h4>
+                    <span class="equation">
+                        \[
+                        F_1 = CV_1(x) \cdot F_{P1} \cdot \sqrt{ \frac{P_1 - P_2}{S_g}} \tag{3}
+                        \]
+                    </span>
+                    <span class="equation">
+                        \[
+                        F_2 = CV_2(x) \cdot F_{P2} \cdot \sqrt{ \frac{P_4 - P_5}{S_g}} \tag{4}
+                        \]
+                    </span>
+                    <span class="equation">
+                        \[
+                        F_3 = CV_3(x) \cdot F_{P3} \cdot \sqrt{ \frac{P_7 - P_8}{S_g}} \tag{5}
+                        \]
+                    </span>
+                    <p>Flows through each valve in the system, driven by valve coefficients and pressure differences.
+                    </p>
+                </div>
 
-      <h3>Implementation Details</h3>
-      <p>The system equations are solved numerically using SciPy’s <code>odeint</code> function, which integrates the differential equations over time. Flask handles user inputs (e.g., \( Q_{in}, K_p, K_i, K_d \)) via a web interface, and Chart.js renders real-time plots of \( h_1 \) and \( h_2 \). Key implementation notes:</p>
-      <ul class="feature-list">
-        <li><strong>Numerical Stability</strong>: Safeguards prevent negative heights or flows (e.g., \( \max(0, h_1 - h_2) \) in \( Q_{out1} \)).</li>
-        <li><strong>Assumptions</strong>: Incompressible fluid, constant tank areas, and linear valve response for simplicity.</li>
-        <li><strong>Visualization</strong>: Chart.js updates plots at 60 FPS, synchronized with ODE solutions.</li>
-      </ul>
+                <!-- Pressure Equations -->
+                <div class="equation-block">
+                    <h4>Pressure Equations</h4>
+                    <span class="equation">
+                        \[
+                        P_2 = P_0 + \rho g H_1 \tag{6}
+                        \]
+                    </span>
+                    <span class="equation">
+                        \[
+                        P_3 = P_0 + \rho g H_1 \tag{7}
+                        \]
+                    </span>
+                    <span class="equation">
+                        \[
+                        P_5 = P_0 + \rho g H_2 \tag{8}
+                        \]
+                    </span>
+                    <span class="equation">
+                        \[
+                        P_6 = P_0 + \rho g H_2 \tag{9}
+                        \]
+                    </span>
+                    <p>Hydrostatic pressures at various points in the system, derived from tank liquid heights and
+                        gravitational effects.</p>
+                </div>
+            </div>
 
-      <h3>System Diagram</h3>
-      <p>The diagram below illustrates the two-tank system configuration:</p>
-      <img src="diagram.png" alt="Two-Tank System Diagram" loading="lazy" class="demo-image">
-      <p><em>Note: Replace with an actual diagram of the system, showing tanks, valves, and flow paths.</em></p>
+            <!-- Process & Equipment Variables -->
+            <h3>Process & Equipment Variables (23)</h3>
+            <p>The following variables are used in the 9 equations above:</p>
 
-      <h3>Applications</h3>
-      <p>This simulation is relevant to chemical engineering processes like reactor level control or distillation column operations, demonstrating robust control under dynamic conditions. The codebase and interface are extensible for multi-tank systems or advanced control strategies.</p>
-    </section>
-  </main>
 
-  <!-- Footer -->
-  <footer role="contentinfo">
-    <p>&copy; <script>document.write(new Date().getFullYear())</script> Billy Kropke</p>
-  </footer>
+            <div class="variable-group">
+                <ul class="feature-list">
+                    <li class="variable-item">
+                        <span class="variable">H₁: Height of Tank 1 (ft)</span>
+                        <span class="var-number">(1)</span>
+                    </li>
+                    <li class="variable-item">
+                        <span class="variable">H₂: Height of Tank 2 (ft)</span>
+                        <span class="var-number">(2)</span>
+                    </li>
+                    <li class="variable-item">
+                        <span class="variable">F₁: Flow from the source/inlet into Tank 1 (ft³/s)</span>
+                        <span class="var-number">(3)</span>
+                    </li>
+                    <li class="variable-item">
+                        <span class="variable">F₂: Flow from Tank 1 to Tank 2 (ft³/s)</span>
+                        <span class="var-number">(4)</span>
+                    </li>
+                    <li class="variable-item">
+                        <span class="variable">F₃: Flow from Tank 2 to the outlet/ambient (ft³/s)</span>
+                        <span class="var-number">(5)</span>
+                    </li>
+                    <li class="variable-item">
+                        <span class="variable">CV₁: Flow coefficient of Valve 1 (unitless)</span>
+                        <span class="var-number">(6)</span>
+                    </li>
+                    <li class="variable-item">
+                        <span class="variable">CV₂: Flow coefficient of Valve 2 (unitless)</span>
+                        <span class="var-number">(7)</span>
+                    </li>
+                    <li class="variable-item">
+                        <span class="variable">CV₃: Flow coefficient of Valve 3 (unitless)</span>
+                        <span class="var-number">(8)</span>
+                    </li>
+                    <li class="variable-item">
+                        <span class="variable">Fₚ₁: Piping geometry factor for Valve 1 (unitless)</span>
+                        <span class="var-number">(9)</span>
+                    </li>
+                    <li class="variable-item">
+                        <span class="variable">Fₚ₂: Piping geometry factor for Valve 2 (unitless)</span>
+                        <span class="var-number">(10)</span>
+                    </li>
+                    <li class="variable-item">
+                        <span class="variable">Fₚ₃: Piping geometry factor for Valve 3 (unitless)</span>
+                        <span class="var-number">(11)</span>
+                    </li>
+                    <li class="variable-item">
+                        <span class="variable">D: Diameter of tanks (ft)</span>
+                        <span class="var-number">(12)</span>
+                    </li>
+                    <li class="variable-item">
+                        <span class="variable">&rho;: Density of fluid (kg/m³)</span>
+                        <span class="var-number">(13)</span>
+                    </li>
+                    <li class="variable-item">
+                        <span class="variable">g: Acceleration due to gravity (standard Earth gravity, 9.81 m/s²)</span>
+                        <span class="var-number">(14)</span>
+                    </li>
+                    <li class="variable-item">
+                        <span class="variable">P₀: Ambient atmospheric pressure (psia)</span>
+                        <span class="var-number">(15)</span>
+                    </li>
+                    <li class="variable-item">
+                        <span class="variable">P₁: Inlet pressure from the source into Tank 1 (psia)</span>
+                        <span class="var-number">(16)</span>
+                    </li>
+                    <li class="variable-item">
+                        <span class="variable">P₂: Pressure at the inlet of Tank 1 (psia)</span>
+                        <span class="var-number">(17)</span>
+                    </li>
+                    <li class="variable-item">
+                        <span class="variable">P₃: Pressure at the outlet of Tank 1 (psia)</span>
+                        <span class="var-number">(18)</span>
+                    </li>
+                    <li class="variable-item">
+                        <span class="variable">P₄: Discharge pressure from Pump 1 (psia)</span>
+                        <span class="var-number">(19)</span>
+                    </li>
+                    <li class="variable-item">
+                        <span class="variable">P₅: Pressure at the inlet of Tank 2 (psia)</span>
+                        <span class="var-number">(20)</span>
+                    </li>
+                    <li class="variable-item">
+                        <span class="variable">P₆: Pressure at the outlet of Tank 2 (psia)</span>
+                        <span class="var-number">(21)</span>
+                    </li>
+                    <li class="variable-item">
+                        <span class="variable">P₇: Discharge pressure from Pump 2 (psia)</span>
+                        <span class="var-number">(22)</span>
+                    </li>
+                    <li class="variable-item">
+                        <span class="variable">P₈: Outlet pressure to ambient (psia)</span>
+                        <span class="var-number">(23)</span>
+                    </li>
+                </ul>
+            </div>
 
-  <!-- Main Script -->
-  <script src="../../js/scripts.js"></script>
+            <!-- Degrees of Freedom -->
+            <h3>Degrees of Freedom (D.O.F.)</h3>
+            <p>The system has <strong>23 variables</strong> and <strong>9 governing equations</strong>, resulting in
+                <strong>14 remaining degrees of freedom (R.D.O.F.)</strong>. These R.D.O.F. are categorized to clarify
+                which variables can be adjusted or are set by design.</p>
+
+            <div class="dof-grid">
+                <div class="dof-card">
+                    <h4>Dimensions & Physical Properties (7)</h4>
+                    <p>D, &rho;, g, P₀, Fₚ₁, Fₚ₂, Fₚ₃ </p>
+                    <p>Design-determined physical parameters defining the tank system.</p>
+                </div>
+
+                <div class="dof-card">
+                    <h4>Manipulated Variables (MVs) (3)</h4>
+                    <p>Cv₁, Cv₂, Cv₃</p>
+                    <p>Valve coefficients that can be adjusted to control flow rates.</p>
+                </div>
+
+                <div class="dof-card">
+                    <h4>Disturbance Variables (DVs) (2)</h4>
+                    <p>P₁, P₈</p>
+                    <p>External inputs that affect the system but are not controlled.</p>
+                </div>
+
+                <div class="dof-card">
+                    <h4>Additional Inputs (2)</h4>
+                    <p>P₄, P₇</p>
+                    <P>Pump discharge pressures.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="pid-control">
+            <h2>PID Control</h2>
+
+            <div class="pid-info">
+                <p>The system uses two PID controllers to regulate liquid levels:</p>
+                <ul class="feature-list">
+                    <li><strong>Valve 1</strong> - regulates <em>Tank 1</em> height (H₁) to 8 ft.</li>
+                    <li><strong>Valve 2</strong> - regulates <em>Tank 2</em> height (H₂) to 8 ft.</li>
+                    <li><strong>Valve 3</strong> - fixed at 50% open (CV₃ = 0.5), not actively controlled.</li>
+                </ul>
+
+
+                <div class="pid-equation">
+                    \[
+                    u(t) \;=\; K_{p}\, e(t) \;+\; K_{i}\int e(t)\,dt \;+\; K_{d}\,\frac{d e(t)}{dt} + \text{bias}
+                    \]
+                </div>
+
+                <p>Where:</p>
+                <ul class="feature-list">
+                    <li><em>u(t)</em> : valve control signal.</li>
+                    <li><em>e(t) = (setpoint − H)</em> : liquid level error for the controlled tank.</li>
+                    <li><em>K<sub>p</sub>, K<sub>i</sub>, K<sub>d</sub></em> : proportional, integral, and derivative
+                        gains.</li>
+                    <li><em>bias</em> : a fixed offset in the PID output used to keep the valve at a nominal position
+                        when the system is at setpoint (no error).</li>
+                </ul>
+
+                <p>The PID outputs are mapped to valve travel and clipped to the normalized range <code>[0.15, 1]</code>
+                    to ensure stable operation and prevent valve saturation.</p>
+
+                <p><strong>Control Strategy:</strong></p>
+                <ul class="feature-list">
+                    <li>Each PID controller continuously adjusts its respective valve to maintain the tank height at the
+                        setpoint of 8 ft.</li>
+                    <li>The controllers are tuned to minimize oscillations and achieve stable tank levels within a few
+                        seconds after disturbances.</li>
+                    <li>Controller outputs account for interactions between Tank 1 and Tank 2 due to the interconnected
+                        system dynamics.</li>
+                </ul>
+
+                <p>Performance Monitoring: Tank heights (H₁ and H₂) are tracked at each time step (0.1 s) to evaluate
+                    control performance and system stability.</p>
+            </div>
+        </section>
+
+        <section id="implementation-details">
+            <h2>Implementation Details</h2>
+
+            <div class="implementation-info">
+
+                <p>The system equations are solved numerically using SciPy's <code>odeint</code> function, which
+                    integrates the differential equations over time. Flask handles user inputs (e.g., \( P_1, K_p, K_i,
+                    K_d \)) via a web interface, and Chart.js renders real-time plots of \( H_1 \) and \( H_2 \). Key
+                    implementation notes:</p>
+                <ul class="feature-list">
+                    <li><strong>Numerical Stability</strong> : Safeguards ensure tank heights and flow rates remain
+                        physically valid (non-negative).</li>
+                    <li><strong>Assumptions</strong> : Incompressible fluid, uniform tank cross-sectional area, and
+                        linear valve response for simplicity.</li>
+                    <li><strong>Visualization</strong> : Chart.js renders the simulated tank levels over time, providing
+                        a clear visualization of the dynamic response.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="simulation-experiments">
+            <h2>Simulation Experiments / Demonstrations</h2>
+            <div class="experiment-info">
+                <p>
+                    The simulation platform includes interactive experiments that highlight how the
+                    two-tank system responds under different conditions. Demonstrations show how
+                    varying PID gains (<em>Kp</em>, <em>Ki</em>, <em>Kd</em>) affect stability,
+                    oscillations, and settling time, as well as how changes in inlet pressure
+                    influence liquid levels.
+                </p>
+                <p>
+                    A dedicated page provides detailed demonstrations with plots and explanations.
+                    <a href="experiments.html" class="button-link">View Simulation Experiments</a>
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer role="contentinfo">
+        <p>&copy;
+            <script>document.write(new Date().getFullYear())</script> Billy Kropke
+        </p>
+    </footer>
+
+    <!-- Main Script -->
+    <script src="../../js/scripts.js"></script>
 </body>
+
 </html>

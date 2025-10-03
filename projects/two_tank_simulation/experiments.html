@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two-Tank System Experiments</title>
+    <!-- Fonts and Styles -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Montserrat:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+</head>
+
+<body>
+    <header role="banner">
+        <div class="container">
+            <h1>Two-Tank System: Simulation Experiments</h1>
+            <p class="tagline">These experiments illustrate the effect of PID gains and inlet pressure on tank levels
+                (H₁ and H₂).</p>
+
+            <!-- Back links -->
+            <nav class="back-links">
+                <ul>
+                    <li><a href="../../index.html">Back to Portfolio</a></li>
+                    <li><a href="index.html">Back to Project</a></li>
+                    <li><a href="technical-details.html">Back to Technical Details</a></li>
+                </ul>
+            </nav>
+
+            <!-- Section navigation -->
+            <nav class="section-nav">
+                <ul>
+                    <li><a href="#instructions">Instructions</a></li>
+                    <li><a href="#experiment-proportional">Proportional</a></li>
+                    <li><a href="#experiment-integral">Integral</a></li>
+                    <li><a href="#experiment-high-kp">High Kp</a></li>
+                    <li><a href="#experiment-pi">PI Control</a></li>
+                    <li><a href="#experiment-inlet">Inlet Pressure</a></li>
+                    <li><a href="#summary">Summary</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" role="main">
+
+        <!-- Instructions / Overview -->
+        <section id="instructions">
+            <h2>Instructions</h2>
+            <p>This page demonstrates how different controller settings and system parameters affect the two-tank system
+                dynamics. Each experiment includes a plot or screenshot and key observations to aid learning.</p>
+            <p>For interactive simulation, please visit the <a href="simulation.html">live simulation page</a>.</p>
+        </section>
+
+        <!-- Experiment: Proportional Only -->
+        <section id="experiment-proportional">
+            <h2>Proportional Control Only</h2>
+            <img src="images/proportional.png" alt="Proportional only experiment">
+            <p><strong>Observation:</strong> The tanks respond quickly to disturbances, but steady-state error remains.
+                This demonstrates why integral action is needed.</p>
+        </section>
+
+        <!-- Experiment: Integral Only -->
+        <section id="experiment-integral">
+            <h2>Integral Control Only</h2>
+            <img src="images/integral.png" alt="Integral only experiment">
+            <p><strong>Observation:</strong> Steady-state error is eliminated, but response may be slower and overshoot
+                can occur.</p>
+        </section>
+
+        <!-- Experiment: High Proportional Gain -->
+        <section id="experiment-high-kp">
+            <h2>High Proportional Gain (Kp)</h2>
+            <img src="images/high-kp.png" alt="High Kp experiment">
+            <p><strong>Observation:</strong> Overshoot is significant and oscillations may appear. Illustrates the risk
+                of too high Kp.</p>
+        </section>
+
+        <!-- Experiment: Proportional + Integral -->
+        <section id="experiment-pi">
+            <h2>Proportional + Integral Control</h2>
+            <img src="images/pi.png" alt="Proportional + Integral experiment">
+            <p><strong>Observation:</strong> Steady-state error is removed and response is faster. However, if Ki is too
+                high, oscillations or instability can occur.</p>
+        </section>
+
+        <!-- Experiment: Changing Inlet Pressure -->
+        <section id="experiment-inlet">
+            <h2>Effect of Inlet Pressure (P₁)</h2>
+            <img src="images/inlet-change.png" alt="Inlet pressure experiment">
+            <p><strong>Observation:</strong> Increasing P₁ temporarily raises H₁ and H₂. The PID controllers compensate
+                to bring the tanks back to the setpoint.</p>
+        </section>
+
+        <!-- Summary -->
+        <section id="summary">
+            <h2>Summary</h2>
+            <p>These experiments highlight key lessons about PID control, system dynamics, and how changes in system
+                inputs affect interconnected tanks. Observing these responses helps in tuning controllers and
+                understanding multi-variable interactions.</p>
+            <p>For hands-on exploration, use the <a href="simulation.html">interactive simulation</a>.</p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Your Name / Portfolio</p>
+    </footer>
+
+    <!-- Main Script -->
+    <script src="../../js/scripts.js"></script>
+</body>
+
+</html>
